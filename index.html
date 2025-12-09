@@ -7,7 +7,6 @@
 
   <!-- Google Tag Manager (GTM) -->
   <script>
-    // Replace with your GTM container ID
     (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -60,7 +59,8 @@
 
   <div class="container">
     <h2>Contact Us</h2>
-    <form id="contactForm" action="thankyou.html" method="GET">
+
+    <form id="contactForm">
       <input type="text" name="name" placeholder="Your Name" required />
       <input type="email" name="email" placeholder="Your Email" required />
       <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
@@ -69,13 +69,20 @@
   </div>
 
   <script>
-    // Push form submission event for GA4 and Google Ads via GTM
-    document.getElementById('contactForm').addEventListener('submit', function(){
+    // Push submission event + redirect
+    document.getElementById('contactForm').addEventListener('submit', function(e){
+      e.preventDefault(); // stop normal submission
+
+      // Trigger GTM event for GA4 & Google Ads
       dataLayer = window.dataLayer || [];
       dataLayer.push({
         'event': 'contact_form_submit'
       });
+
+      // Redirect to thankyou.html
+      window.location.href = "thankyou.html";
     });
   </script>
+
 </body>
 </html>
